@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-springboot-app-demo-deployment
+  namespace: default
+  labels:
+    app: kubernetes-springboot-app-demo-deployment
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  selector:
+    matchLabels:
+      app: kubernetes-springboot-app-demo-deployment
+  template:
+    metadata:
+      labels:
+        app: kubernetes-springboot-app-demo-deployment
+    spec:
+      containers:
+        - name: kubernetes-springboot-app-demo
+          image: kubernetes-springboot-app-demo:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9091

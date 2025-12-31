@@ -1,0 +1,15 @@
+apiVersion: v1 #Kubernetes API version
+kind: Service  #Kubernetes component name
+metadata: #Kumbenetes component's metadata creating
+  name: kubernetes-springboot-app-demo-deployment
+  namespace: default
+  labels:
+    app: kubernetes-springboot-app-demo-deployment
+spec:
+  type: NodePort #type of service
+  selector:
+    app: kubernetes-springboot-app-demo-deployment
+  ports:
+    - port: 9091          # The port service is running on the cluster
+      targetPort: 9091    # Container Port
+      protocol: TCP
